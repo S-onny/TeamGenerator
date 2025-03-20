@@ -81,10 +81,10 @@ with col2:
         teams, skills = generate_teams(df_selected, num_teams, players_per_team)
         cols = st.columns(num_teams)
 
-    for i, (team, skill) in enumerate(zip(teams, skills)):
-        with cols[i]:
-            st.markdown(f"""<div style='border: 2px solid #0099FF; padding: 10px; margin: 10px; height: auto; overflow-y: auto;>" <h3>Team {i+1} (Total Skill: {skill})</h3><ul>""", unsafe_allow_html=True)
-            st.subheader(f"{i+1}팀 (총 ⭐️: {skill})")
-            for player in team:
-                st.write(f"<li>{player['FC 파란 명단']}({player['성별']}) - ⭐️: {player['기본기']} - {'GK' if player['포지션'] == 'GK' else 'FD'}</li>", unsafe_allow_html=True)
-            st.markdown("</ul></div>", unsafe_allow_html=True)
+for i, (team, skill) in enumerate(zip(teams, skills)):
+    with cols[i]:
+        st.markdown(f"""<div style='border: 2px solid #0099FF; padding: 10px; margin: 10px; height: auto; overflow-y: auto;>" <h3>Team {i+1} (Total Skill: {skill})</h3><ul>""", unsafe_allow_html=True)
+        st.subheader(f"{i+1}팀 (총 ⭐️: {skill})")
+        for player in team:
+            st.write(f"<li>{player['FC 파란 명단']}({player['성별']}) - ⭐️: {player['기본기']} - {'GK' if player['포지션'] == 'GK' else 'FD'}</li>", unsafe_allow_html=True)
+        st.markdown("</ul></div>", unsafe_allow_html=True)
