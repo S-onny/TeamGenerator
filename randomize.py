@@ -75,16 +75,32 @@ players_per_team = st.number_input("팀별 인원(4~7)", min_value=3, max_value=
 
 df_selected = data[data["FC 파란 명단"].isin(selected_players)].to_dict("records")
 
-col1, col2, col3 = st.columns([1, 2, 1])
-with col2:
-    if st.button("기가 민기야 팀 만들어줘"):
-        teams, skills = generate_teams(df_selected, num_teams, players_per_team)
-        cols = st.columns(num_teams)
+st.markdown("""
+            <div style="display: flex; justify-content: center; margin-top: 20px;">
+                <button style="background-color: #0099FF; color: white; font-size: 18px; padding: 10px 20px; border: none; border-radius: 10px; cursor: pointer;"
+                onclick="document.getElementById('start-button').click()">기가 민기야 팀 만들어줘
+                </button>
+            </div>""", unsafe_allow_html=True,)
 
-        for i, (team, skill) in enumerate(zip(teams, skills)):
-            with cols[i]:
-                st.markdown(f"""<div style='border: 2px solid #0099FF; padding: 10px; margin: 10px; height: auto; overflow-y: auto;>" <h3>Team {i+1} (Total Skill: {skill})</h3><ul>""", unsafe_allow_html=True)
-                st.subheader(f"{i+1}팀 (총 ⭐️: {skill})")
-                for player in team:
-                    st.write(f"<li>{player['FC 파란 명단']}({player['성별']}) - ⭐️: {player['기본기']} - {'GK' if player['포지션'] == 'GK' else 'FD'}</li>", unsafe_allow_html=True)
-                st.markdown("</ul></div>", unsafe_allow_html=True)
+if st.button("기가 민기야 팀 만들어줘", key="start-button"):
+    teams, skills = generate_teams(df_selected, num_teams, players_per_team)
+    cols = st.columns(num_teams)
+
+    for i, (team, skill) in enumerate(zip(teams, skills)):
+        with cols[i]:
+            st.markdown(
+                f"""
+                <div style='border: 2px solid #0099FF; border-radius: 10px; padding: 10px; margin: 10px; background-color: #f0f8ff;'>
+                    <h3 style='color: #0077CC; text-align: center;'>⚽ Team {i+1} ⚽</h3>
+                    <h4 style='color: #333; text-align: center;'>⭐ 총 별점: {skill} ⭐</h4>
+                    <ul style='list-style-type: none; padding: 0;'>
+                """, unsafe_allow_html=True,)
+
+            for player in team:
+                st.markdown(
+                    f"<li style='padding: 5px; border-bottom: 1px solid #ccc;'>"
+                    f"<b>{player['FC 파란 명단']} ({player['성별']})</b> - "
+                    f"⭐: {player['기본기']} - {'GK' if player['포지션'] == 'GK' else 'FD'}</li>",
+                    unsafe_allow_html=True,)
+
+            st.markdown("</ul></div>", unsafe_allow_html=True)
