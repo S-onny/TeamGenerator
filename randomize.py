@@ -69,7 +69,7 @@ st.markdown("<h1 style='text-align: center;'>⚽️ FC 파란 팀 생성기 ⚽�
 data = load_data()
 
 # Select players from list
-selected_players = st.multiselect("참여자 선택", data["FC 파란 명단"].tolist())
+selected_players = st.multiselect("선수 입장", data["FC 파란 명단"].tolist())
 num_teams = st.number_input("팀 갯수(2~6)", min_value=2, max_value=6, value=3)
 players_per_team = st.number_input("팀별 인원(4~7)", min_value=3, max_value=11, value=6)
 
