@@ -85,7 +85,6 @@ if st.button("기가 민기야 팀 만들어줘"):
                 f"""
                 <h3 style='color: #0077CC; text-align: center;'>Team {i+1}</h3>
                 <h4 style='color: #333; text-align: center;'>⭐x{skill}</h4>
-                <ul style='list-style-type: none; padding: 0;'>
                 """, unsafe_allow_html=True,)
 
             for player in team:
