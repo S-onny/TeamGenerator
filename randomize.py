@@ -75,14 +75,7 @@ players_per_team = st.number_input("팀별 인원(4~7)", min_value=3, max_value=
 
 df_selected = data[data["FC 파란 명단"].isin(selected_players)].to_dict("records")
 
-st.markdown("""
-            <div style="display: flex; justify-content: center; margin-top: 20px;">
-                <button style="background-color: #0099FF; color: white; font-size: 18px; padding: 10px 20px; border: none; border-radius: 10px; cursor: pointer;"
-                onclick="document.getElementById('start-button').click()">기가 민기야 팀 만들어줘
-                </button>
-            </div>""", unsafe_allow_html=True,)
-
-if st.button("기가 민기야 팀 만들어줘", key="start-button"):
+if st.button("기가 민기야 팀 만들어줘"):
     teams, skills = generate_teams(df_selected, num_teams, players_per_team)
     cols = st.columns(num_teams)
 
