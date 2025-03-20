@@ -84,7 +84,7 @@ if st.button("기가 민기야 팀 만들어줘"):
             st.markdown(
                 f"""
                 <h3 style='color: #0077CC; text-align: center;'>Team {i+1}</h3>
-                <h4 style='color: #333; text-align: center;'>⭐x<span style='color: yellow;>{skill}</span></h4>
+                <h4 style='color: #333; text-align: center;'>⭐x<span style='color: yellow;'>{skill}</span></h4>
                 """, unsafe_allow_html=True,)
 
             for player in team:
