@@ -65,7 +65,7 @@ def generate_teams(players, num_teams, players_per_team):
     return teams, team_skill
 
 # Streamlit UI
-st.title("⚽️FC 파란 팀 생성기⚽️")
+st.markdown("<h1 style='text-align: center;'>⚽️ FC 파란 팀 생성기 ⚽️</h1>", unsafe_allow_html=True)
 data = load_data()
 
 # Select players from list
@@ -75,14 +75,16 @@ players_per_team = st.number_input("팀별 인원(4~7)", min_value=3, max_value=
 
 df_selected = data[data["FC 파란 명단"].isin(selected_players)].to_dict("records")
 
-if st.button("기가 민기야 팀 만들어줘"):
-    teams, skills = generate_teams(df_selected, num_teams, players_per_team)
-    cols = st.columns(num_teams)
+col1, col2, col3 = st.columns([1, 2, 1])
+with col2:
+    if st.button("기가 민기야 팀 만들어줘"):
+        teams, skills = generate_teams(df_selected, num_teams, players_per_team)
+        cols = st.columns(num_teams)
 
     for i, (team, skill) in enumerate(zip(teams, skills)):
         with cols[i]:
             st.markdown(f"""<div style='border: 2px solid #0099FF; padding: 10px; margin: 10px; height: auto; overflow-y: auto;>" <h3>Team {i+1} (Total Skill: {skill})</h3><ul>""", unsafe_allow_html=True)
-            st.subheader(f"{i+1}팀 (총 별점: {skill})")
+            st.subheader(f"{i+1}팀 (총 ⭐️: {skill})")
             for player in team:
-                st.write(f"<li>{player['FC 파란 명단']}({player['성별']}) - 별점: {player['기본기']} - {'GK' if player['포지션'] == 'GK' else 'FD'}</li>", unsafe_allow_html=True)
+                st.write(f"<li>{player['FC 파란 명단']}({player['성별']}) - ⭐️: {player['기본기']} - {'GK' if player['포지션'] == 'GK' else 'FD'}</li>", unsafe_allow_html=True)
             st.markdown("</ul></div>", unsafe_allow_html=True)
